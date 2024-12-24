@@ -1,0 +1,9 @@
+RewriteEngine On
+RewriteBase /appbarberia/public/
+
+# Asegúrate de que las solicitudes no apunten a un archivo o directorio existente
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+# Redirige todas las solicitudes a index.php sin incluir /public
+RewriteRule ^(.*)$ index.php?/$1 [L]
