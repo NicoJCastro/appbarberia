@@ -22,3 +22,14 @@ p {
     color: v.$blanco;
     font-size: 2rem;
 }
+
+// Como estas clases se van a compartir varias veses es meor que queden aca.
+.nombre-pagina {
+   text-align: center;
+   margin: 5rem 0;
+   font-weight: v.$bold;
+}
+
+.descripcion-pagina{
+    text-align: center;
+}
