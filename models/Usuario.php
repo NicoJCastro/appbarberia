@@ -33,6 +33,56 @@ class Usuario extends ActiveRecord {
         $this->confirmado = $args['confirmado'] ?? 0;
         $this->token = $args['token'] ?? '';
     }
+
+    // Mensajes de validación para la creación de un nueva cuenta
+
+    public function validarNuevaCuenta(){
+        if(!$this->nombre){
+            self::$alertas['error'][] = "Debes añadir un nombre";
+        }
+
+        if(!$this->apellido){
+            self::$alertas['error'][] = "Debes añadir un apellido";
+        }
+
+        if(!$this->telefono){
+            self::$alertas['error'][] = "Debes añadir un telefono";
+        }
+
+        if(!$this->email){
+            self::$alertas['error'][] = "Debes añadir un email";
+        }
+
+        if(!$this->password){
+            self::$alertas['error'][] = "Debes añadir un password";
+        }
+
+        if (strlen($this->password) < 6){
+            self::$alertas['error'][] = "El password debe ser de al menos 6 caracteres";
+        }
+       
+
+        return self::$alertas;
+    }
+
+    // Verifica si un usuario ya existe
+    public function existeUsuario(){
+        $query = "SELECT * FROM " . self::$tabla . " WHERE email = '" . $this->email . "' LIMIT 1";        
+        $resultado = self::$db->query($query);
+
+        if(!$resultado->num_rows){
+            self::$alertas['error'][] = "El usuario ya existe";
+            return;
+        }
+
+        return $resultado;
+    }
+
+    // Hashear password
+    public function hashPassword(){
+        $this->password = password_hash($this->password, PASSWORD_BCRYPT);
+    }
+
 }
 
 ?>
