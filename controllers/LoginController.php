@@ -13,16 +13,21 @@ class LoginController {
       echo 'Cerrar sesión';
    }
 
-   public static function forgotPassword() {
-      echo 'Olvidé mi contraseña';
+   public static function forgotPassword(Router $router) {
+      $router->render('auth/forgot-password', [
+         
+      ]);
    }
 
    public static function recoverPassword() {
       echo 'Recuperar password';
    }
 
-   public static function crear() {
-      echo 'Crear cuenta';
+   public static function crear(Router $router) {
+      $router->render('auth/crear-cuenta', [
+         
+      ]);
+      
    }
 }
 
