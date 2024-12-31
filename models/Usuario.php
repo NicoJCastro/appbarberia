@@ -2,6 +2,8 @@
 
 namespace Model;
 
+use PHPMailer\PHPMailer\PHPMailer;
+
 //Objeto Usuario
 
 class Usuario extends ActiveRecord {
@@ -87,6 +89,8 @@ class Usuario extends ActiveRecord {
     public function crearToken(){
         $this->token = uniqid();
     }
+
+    
 
 }
 

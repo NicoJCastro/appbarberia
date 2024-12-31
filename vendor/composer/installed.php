@@ -3,7 +3,7 @@
         'name' => 'nicolascastro/app-barberia',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => '4137642db50abc5140b00198033dcf3cba96e996',
+        'reference' => '9bf0562e5657db61ae39e3fcb538ac2266d0c207',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -13,7 +13,7 @@
         'nicolascastro/app-barberia' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => '4137642db50abc5140b00198033dcf3cba96e996',
+            'reference' => '9bf0562e5657db61ae39e3fcb538ac2266d0c207',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),

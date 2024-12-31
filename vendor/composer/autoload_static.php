@@ -19,6 +19,7 @@ class ComposerStaticInit5ca920515f685b282a096a1e7fe19c5b
         'C' => 
         array (
             'Controllers\\' => 12,
+            'ClassesHelper\\' => 14,
         ),
     );
 
@@ -38,6 +39,10 @@ class ComposerStaticInit5ca920515f685b282a096a1e7fe19c5b
         'Controllers\\' => 
         array (
             0 => __DIR__ . '/../..' . '/controllers',
+        ),
+        'ClassesHelper\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/classesHelper',
         ),
     );
 

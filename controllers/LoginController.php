@@ -2,8 +2,13 @@
 
 namespace Controllers;
 
+// ini_set('display_errors', 1);
+// error_reporting(E_ALL);
+
 use MVC\Router;
 use Model\Usuario;
+use ClassesHelper\Email;
+
 
 class LoginController {
    public static function login(Router $router) {
@@ -51,21 +56,39 @@ class LoginController {
                $usuario->crearToken();
 
                // Enviar el email
-               
+               $email = new Email($usuario->email, $usuario->nombre, $usuario->token);
+              
+               $email->enviarConfirmacion();
 
-              debuguear($usuario);
+               // Guardar en la base de datos
+               $resultado = $usuario->guardar();
+               if ($resultado) {
+                  header('Location: /appbarberia/mensaje');
+               }
+
+
+             
             }
          }
       }
 
       $router->render('auth/crear-cuenta', [
          'usuario' => $usuario,
-         'alertas' => $alertas,
-         'resultado' => $resultado
+         'alertas' => $alertas
+         
 
       ]);
       
-       }
+   }
+
+   public static function confirmarCuenta() {
+      echo 'Confirmar cuenta';
+   }
+
+   public static function mensaje(Router $router) {
+      $router->render('auth/mensaje');
+   }
+
 }
 
 ?>
