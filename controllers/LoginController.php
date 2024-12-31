@@ -65,8 +65,6 @@ class LoginController {
                if ($resultado) {
                   header('Location: /appbarberia/mensaje');
                }
-
-
              
             }
          }
@@ -75,13 +73,10 @@ class LoginController {
       $router->render('auth/crear-cuenta', [
          'usuario' => $usuario,
          'alertas' => $alertas
-         
 
       ]);
       
    }
-
-  
 
    public static function mensaje(Router $router) {
       $router->render('auth/mensaje');
@@ -92,8 +87,23 @@ class LoginController {
       $alertas = [];
       $token = s($_GET['token']);
       $usuario = Usuario::where('token', $token);
-      debuguear($usuario);
 
+      if (empty($usuario)) {
+         // Mostrar mensaje de error
+         Usuario::setAlerta('error', 'Token no válido');
+      } else {
+         // Modificar a usuario confirmado (en bd confirmado = 1)
+         $usuario->confirmado = "1";
+         $usuario->token = null;
+         $usuario->guardar();
+         Usuario::setAlerta('exito', 'Cuenta confirmada exitosamente');
+      }
+
+      // if ($usuario->confirmado = "1") {
+      //    header('Location: /appbarberia/login');
+      // }
+     
+      $alertas = Usuario::getAlertas();
       $router->render('auth/confirmar-cuenta', [
          'alertas' => $alertas
       ]);

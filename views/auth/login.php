@@ -15,9 +15,6 @@
 </form>
 
 <div class="acciones">
-
     <a href="/appbarberia/crear-cuenta">¿Aún no tienes una cuenta? Crear una</a>
     <a href="/appbarberia/forgot-password">¿Olvidaste tu Password?</a>
-
-
 </div>
