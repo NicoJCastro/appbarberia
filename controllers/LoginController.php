@@ -81,12 +81,22 @@ class LoginController {
       
    }
 
-   public static function confirmarCuenta() {
-      echo 'Confirmar cuenta';
-   }
+  
 
    public static function mensaje(Router $router) {
       $router->render('auth/mensaje');
+   }
+
+   public static function confirmarCuenta(Router $router) {
+
+      $alertas = [];
+      $token = s($_GET['token']);
+      $usuario = Usuario::where('token', $token);
+      debuguear($usuario);
+
+      $router->render('auth/confirmar-cuenta', [
+         'alertas' => $alertas
+      ]);
    }
 
 }
