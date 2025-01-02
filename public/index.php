@@ -17,7 +17,7 @@ $router->get('/logout', [LoginController::class, 'logout']);
 $router->get('/forgot-password', [LoginController::class, 'forgotPassword']);
 $router->post('/forgot-password', [LoginController::class, 'forgotPassword']);
 $router->get('/recover-password', [LoginController::class, 'recoverPassword']);
-$router->get('/recover-password', [LoginController::class, 'recoverPassword']);
+$router->post('/recover-password', [LoginController::class, 'recoverPassword']);
 
 //Crear cuenta
 

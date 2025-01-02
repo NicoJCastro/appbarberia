@@ -67,6 +67,29 @@ class Usuario extends ActiveRecord {
         return self::$alertas;
     }
 
+    // Validamos el email
+
+    public function validarEmail(){
+        if(!$this->email){
+            self::$alertas['error'][] = "Debes añadir un email";
+        }
+
+        return self::$alertas;
+    }
+
+    // Validar Password
+    public function validarPassword() {
+        if(!$this->password){
+            self::$alertas['error'][] = "Debes añadir un password";
+        }
+
+        if (strlen($this->password) < 6){
+            self::$alertas['error'][] = "El password debe ser de al menos 6 caracteres";
+        }
+
+        return self::$alertas;
+    }
+
     // Verifica si un usuario ya existe
     public function existeUsuario(){
         $query = "SELECT * FROM " . self::$tabla . " WHERE email = '" . $this->email . "' LIMIT 1";
@@ -90,7 +113,30 @@ class Usuario extends ActiveRecord {
         $this->token = bin2hex(random_bytes(8)); // Genera exactamente 16 caracteres
     }
 
-    
+    // Comprobar password
+
+    public function verificarPassword($password){
+       $resultado = password_verify($password, $this->password);
+       if(!$resultado || !$this->confirmado){
+           self::$alertas['error'][] = "El password es incorrecto o tu cuenta no ha sido confirmada";
+       } else {
+         return true;
+       }
+       return $resultado;
+    }
+
+    // Validar el login
+    public function validarLogin(){
+        if(!$this->email){
+            self::$alertas['error'][] = "Debes añadir un email";
+        }
+
+        if(!$this->password){
+            self::$alertas['error'][] = "Debes añadir un password";
+        }
+
+        return self::$alertas;
+    }    
 
 }
 

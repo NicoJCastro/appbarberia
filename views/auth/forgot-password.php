@@ -1,6 +1,9 @@
 <h1 class="nombre-pagina">Olvide Password</h1>
 <p class="descripcion-pagina">Reestablece tu password escribiendo tu email a continuación</p>
 
+<?php include_once __DIR__ . "/../template/alertas.php"; ?>
+
+
 <form action="/appbarberia/forgot-password" class="formulario" method="POST">
 
     <div class="campo">
