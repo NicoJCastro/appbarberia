@@ -35,8 +35,5 @@ $router->get('/mensaje', [LoginController::class, 'mensaje']);
 $router->get('/cita', [CitaController::class, 'index']);
 
 
-
-
-
 // Comprueba y valida las rutas, que existan y les asigna las funciones del Controlador
 $router->comprobarRutas();

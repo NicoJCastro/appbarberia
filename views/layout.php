@@ -17,9 +17,8 @@
             <?php echo $contenido; ?>
         </div>
     </div> <!-- contendero-app -->
- 
 
-
+    <?php echo $script ?? ''; ?>
 </body>
 
 </html>

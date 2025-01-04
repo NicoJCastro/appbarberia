@@ -47,3 +47,9 @@
 
 </div>
 
+<?php $script = "
+
+    <script src='/appbarberia/public/build/js/app.js'></script>
+
+"; ?>
+
