@@ -12,6 +12,8 @@ function iniciarApp() {
     botonesPaginador(); // Agrega la funcionalidad de los botones de paginador
     paginaSiguiente();
     paginaAnterior();
+
+    consultarAPI(); // Consulta la API en el backend de PHP
 }
 
 function mostrarSeccion() {
@@ -82,5 +84,41 @@ function paginaAnterior() {
         if (paso <= pasoInicial) return;
         paso--;
         botonesPaginador();
+    });
+}
+
+async function consultarAPI() {
+    try {
+        const url = 'http://localhost/appbarberia/api/servicios'
+        const resultado = await fetch(url);
+        const servicios = await resultado.json();
+        mostrarServicios(servicios);
+    }
+    catch (error) {
+        console.log(error);
+    }
+}
+
+function mostrarServicios(servicios) {
+    servicios.forEach(servicio => {
+        const { id, nombre, precio } = servicio;
+        
+        // DOM Scripting
+        const nombreServicio = document.createElement('P'); // P parrafo 
+        nombreServicio.classList.add('nombre-servicio');
+        nombreServicio.textContent = nombre;
+
+        const precioServicio = document.createElement('P');
+        precioServicio.classList.add('precio-servicio');
+        precioServicio.textContent = `$ ${precio}`;
+
+        const divServicio = document.createElement('DIV');
+        divServicio.classList.add('servicio');
+        divServicio.dataset.idServicio = id;
+        
+        divServicio.appendChild(nombreServicio);
+        divServicio.appendChild(precioServicio);
+
+        document.querySelector('#servicios').appendChild(divServicio); // Agregar al HTML el servicio creado por medio del id= servicios
     });
 }

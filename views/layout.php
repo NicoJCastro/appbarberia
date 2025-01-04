@@ -16,7 +16,7 @@
         <div class="app">
             <?php echo $contenido; ?>
         </div>
-    </div> <!-- contendero-app -->
+    </div> <!-- contenedor-app -->
 
     <?php echo $script ?? ''; ?>
 </body>

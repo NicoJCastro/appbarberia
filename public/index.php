@@ -1,7 +1,12 @@
 <?php 
 
+// ini_set('display_errors', 1);
+// ini_set('display_startup_errors', 1);
+// error_reporting(E_ALL);
+
 require_once __DIR__ . '/../includes/app.php';
 
+use Controllers\APIController;
 use MVC\Router;
 use Controllers\CitaController;
 use Controllers\LoginController;
@@ -31,8 +36,10 @@ $router->get('/confirmar-cuenta', [LoginController::class, 'confirmarCuenta']);
 $router->get('/mensaje', [LoginController::class, 'mensaje']);
 
 //Area Privada
-
 $router->get('/cita', [CitaController::class, 'index']);
+
+//API de Citas
+$router->get('/api/servicios', [APIController::class, 'index']);
 
 
 // Comprueba y valida las rutas, que existan y les asigna las funciones del Controlador
