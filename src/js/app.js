@@ -307,20 +307,38 @@ async function reservarCita () {
     
     // FROMDATA
     const datos = new FormData();
-    
+
     datos.append('fecha', fecha);
     datos.append('hora', hora);
     datos.append('usuarios_id', id);
     datos.append('servicios', idServicio);
-   
-    const url = 'http://localhost/appbarberia/api/citas';
-    const respuesta = await fetch(url, {
-        method: 'POST',
-        body: datos
-    });
-    const resultado = await respuesta.json();
-    console.log(resultado);
-    
-    
+
+    try {
+        const url = 'http://localhost/appbarberia/api/citas';
+        const respuesta = await fetch(url, {
+            method: 'POST',
+            body: datos
+        });
+        const resultado = await respuesta.json();
+        
+        if (resultado.resultado){
+            Swal.fire({
+                icon: "success",
+                title: "Cita Creada",
+                text: "Tu cita fue creada correctamente",
+                button: "OK"
+              }).then(() => {
+                setTimeout(() =>{
+                window.location.reload();
+                }, 2000);
+              })
+        }
+    } catch (error) {
+        Swal.fire({
+            icon: "error",
+            title: "Error",
+            text: "Hubo un error al guardar la cita",
+          });
+    }
 }
 
