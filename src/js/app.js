@@ -194,6 +194,26 @@ function seleccionarHora() {
 
 }
 
+function mostrarAlerta(mensaje, tipo, elemento, desaparece = true) {
+    // Si hay una alerta previa, entonces no crear otra
+    const alertaPrevia = document.querySelector('.alerta');
+    if (alertaPrevia) {
+        alertaPrevia.remove();
+    }
+    const alerta = document.createElement('DIV');
+    alerta.textContent = mensaje;
+    alerta.classList.add('alerta');
+    alerta.classList.add(tipo);
+    const referencia = document.querySelector(elemento);
+    referencia.appendChild(alerta);
+
+    if (desaparece) {
+        setTimeout(() => {
+            alerta.remove();
+        }, 3000);
+    }
+}
+
 function mostrarResumen() {
     const resumen = document.querySelector('.contenido-resumen');
 
@@ -255,33 +275,37 @@ function mostrarResumen() {
     const fechaFormateada = fechaUTC.toLocaleDateString('es-AR', opciones);
 
     const fechaCita = document.createElement('P');
-    fechaCita.innerHTML = `<span>Fecha:</span> ${fechaFormateada}`;    
+    fechaCita.innerHTML = `<span>Fecha:</span> ${fechaFormateada}`;
 
     const horaCita = document.createElement('P');
     horaCita.innerHTML = `<span>Hora:</span> ${hora} Horas`;
 
+    //Boton para Crear una cita
+    const botonReservar = document.createElement('BUTTON');
+    botonReservar.classList.add('boton');
+    botonReservar.textContent = 'Reservar Cita';
+    botonReservar.onclick = reservarCita;
+
     resumen.appendChild(nombreCliente);
     resumen.appendChild(fechaCita);
     resumen.appendChild(horaCita);
+
+    resumen.appendChild(botonReservar);
 }
 
-function mostrarAlerta(mensaje, tipo, elemento, desaparece = true) {
-    // Si hay una alerta previa, entonces no crear otra
-    const alertaPrevia = document.querySelector('.alerta');
-    if (alertaPrevia) {
-        alertaPrevia.remove();
-    }
-    const alerta = document.createElement('DIV');
-    alerta.textContent = mensaje;
-    alerta.classList.add('alerta');
-    alerta.classList.add(tipo);
-    const referencia = document.querySelector(elemento);
-    referencia.appendChild(alerta);
+async function reservarCita () {
 
-    if (desaparece) {
-        setTimeout(() => {
-            alerta.remove();
-        }, 3000);
-    }
+    const datos = new FormData();
+    datos.append('nombre', 'nicolas');
+    
+    const url = 'http://localhost/appbarberia/api/citas';
+    const respuesta = await fetch(url, {
+        method: 'POST',
+        body: datos
+    });
+    const resultado = await respuesta.json();
+    console.log(resultado);
+    // console.log(respuesta);
+    // console.log([...datos]);
 }
 

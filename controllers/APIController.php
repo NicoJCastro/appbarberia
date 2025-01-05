@@ -10,6 +10,14 @@ class APIController {
         $servicios = Servicio::all();
         echo json_encode($servicios); // Convierte el array en un JSON para que pueda ser leído por la API 
     }
+
+    public static function guardarCitas() {
+        $respuesta =  [
+            'datos' => $_POST,
+        ];
+        echo json_encode($respuesta);
+
+    }
 }
 
 ?>
