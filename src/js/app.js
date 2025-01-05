@@ -4,6 +4,7 @@ const pasoFinal = 3;
 
 // Objeto para las citas
 const cita = {
+    id: '',
     nombre: '',
     fecha: '',
     hora: '',
@@ -23,6 +24,7 @@ function iniciarApp() {
 
     consultarAPI(); // Consulta la API en el backend de PHP
 
+    idCliente(); // Almacena el id del cliente
     nombreCliente(); // Almacena el nombre del cliente
     seleccionarFecha(); // Almacena la fecha de la cita
     seleccionarHora(); // Almacena la hora de la cita
@@ -160,6 +162,10 @@ function seleccionarServicio(servicio) {
     }
 }
 
+function idCliente(){
+    cita.id = document.querySelector('#id').value;
+}
+
 function nombreCliente() {
     cita.nombre = document.querySelector('#nombre').value;
 }
@@ -295,9 +301,18 @@ function mostrarResumen() {
 
 async function reservarCita () {
 
-    const datos = new FormData();
-    datos.append('nombre', 'nicolas');
+    const {nombre, fecha, hora, servicios, id} = cita
+
+    const idServicio = servicios.map(servicio => servicio.id)
     
+    // FROMDATA
+    const datos = new FormData();
+    
+    datos.append('fecha', fecha);
+    datos.append('hora', hora);
+    datos.append('usuarios_id', id);
+    datos.append('servicios', idServicio);
+   
     const url = 'http://localhost/appbarberia/api/citas';
     const respuesta = await fetch(url, {
         method: 'POST',
@@ -305,7 +320,7 @@ async function reservarCita () {
     });
     const resultado = await respuesta.json();
     console.log(resultado);
-    // console.log(respuesta);
-    // console.log([...datos]);
+    
+    
 }
 

@@ -31,6 +31,7 @@
             <label for="hora">Hora:</label>
             <input type="time" id="hora" name="hora">
         </div>
+        <input type="hidden" id="id" value= "<?php echo $id; ?>">
     </form> <!-- Aquí se mostrará el formulario con JS -->
 
 
