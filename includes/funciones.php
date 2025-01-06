@@ -27,3 +27,9 @@ function isAuth() : void {
         header('Location: /appbarberia/login');
     }
 }
+
+function isAdmin() : void {
+    if(!isset($_SESSION['admin'])) {
+        header('Location: /appbarberia/login');
+    }
+}
