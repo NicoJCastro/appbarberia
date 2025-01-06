@@ -58,7 +58,10 @@ class LoginController {
    }
 
    public static function logout() {
-      echo 'Cerrar sesión';
+      session_start();
+      $_SESSION = [];
+      
+      header('Location: /appbarberia/login');
    }
 
    public static function forgotPassword(Router $router) {
