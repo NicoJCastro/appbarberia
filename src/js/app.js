@@ -299,19 +299,20 @@ function mostrarResumen() {
     resumen.appendChild(botonReservar);
 }
 
-async function reservarCita () {
+async function reservarCita() {
+    const { nombre, fecha, hora, servicios, id } = cita;
 
-    const {nombre, fecha, hora, servicios, id} = cita
-
-    const idServicio = servicios.map(servicio => servicio.id)
+    // Obtener los IDs de los servicios
+    const idServicios = servicios.map(servicio => servicio.id);
     
-    // FROMDATA
+    // FORMDATA
     const datos = new FormData();
-
+    
     datos.append('fecha', fecha);
     datos.append('hora', hora);
     datos.append('usuarios_id', id);
-    datos.append('servicios', idServicio);
+    // Enviar los IDs de servicios como string
+    datos.append('servicios', idServicios.join(','));
 
     try {
         const url = 'http://localhost/appbarberia/api/citas';
@@ -319,26 +320,27 @@ async function reservarCita () {
             method: 'POST',
             body: datos
         });
+        
         const resultado = await respuesta.json();
         
-        if (resultado.resultado){
+        if(resultado.resultado) {
             Swal.fire({
                 icon: "success",
                 title: "Cita Creada",
                 text: "Tu cita fue creada correctamente",
                 button: "OK"
-              }).then(() => {
-                setTimeout(() =>{
-                window.location.reload();
+            }).then(() => {
+                setTimeout(() => {
+                    window.location.reload();
                 }, 2000);
-              })
+            });
         }
     } catch (error) {
         Swal.fire({
             icon: "error",
             title: "Error",
-            text: "Hubo un error al guardar la cita",
-          });
+            text: "Hubo un error al guardar la cita"
+        });
     }
 }
 
