@@ -107,7 +107,7 @@ function paginaAnterior() {
 
 async function consultarAPI() {
     try {
-        const url = 'http://localhost/appbarberia/api/servicios'
+        const url = `${location.origin}/appbarberia/api/servicios`;
         const resultado = await fetch(url);
         const servicios = await resultado.json();
         mostrarServicios(servicios);
@@ -315,7 +315,7 @@ async function reservarCita() {
     datos.append('servicios', idServicios.join(','));
 
     try {
-        const url = 'http://localhost/appbarberia/api/citas';
+        const url = `${location.origin}/appbarberia/api/citas`;
         const respuesta = await fetch(url, {
             method: 'POST',
             body: datos

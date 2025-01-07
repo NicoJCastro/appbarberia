@@ -21,14 +21,9 @@ class Router
     {
         
         // Proteger Rutas...
-        session_start();
+        session_start();       
 
-        // Arreglo de rutas protegidas...
-        // $rutas_protegidas = ['/admin', '/propiedades/crear', '/propiedades/actualizar', '/propiedades/eliminar', '/vendedores/crear', '/vendedores/actualizar', '/vendedores/eliminar'];
-
-        // $auth = $_SESSION['login'] ?? null;
-
-        $currentUrl = $_SERVER['REQUEST_URI'];
+        $currentUrl = strtok($_SERVER['REQUEST_URI'], '?') ?? '/';
         $currentUrl = parse_url($currentUrl, PHP_URL_PATH);
         $basePath = '/appbarberia';
         $currentUrl = str_replace([$basePath, '/index.php'], '', $currentUrl);

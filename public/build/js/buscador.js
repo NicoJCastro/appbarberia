@@ -1,18 +1,1 @@
-document.addEventListener('DOMContentLoaded', function(){
-    iniciarApp();
-});
-
-function iniciarApp() {
-    buscarPorFecha();
-}
-
-function buscarPorFecha(){
-    const fechaInput = document.querySelector('#fecha');
-    fechaInput.addEventListener('input', function(e) {
-        const fechaSeleccionada = e.target.value;
-        console.log(fechaSeleccionada);
-
-        window.location = `?fecha=${fechaSeleccionada}`;
-    } )
-}
-
+function iniciarApp(){buscarPorFecha()}function buscarPorFecha(){document.querySelector("#fecha").addEventListener("input",(function(n){const e=n.target.value;console.log(e),window.location=`?fecha=${e}`}))}document.addEventListener("DOMContentLoaded",(function(){iniciarApp()}));
